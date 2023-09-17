@@ -21,8 +21,8 @@ plugins: [
 ```
 Then run db migrations.
 ```console
-yarn migrations:generate product-collections
-yarn migartions run
+yarn migration:generate product-collections
+yarn migartion run
 ```
 ## Product Detail Page
 
