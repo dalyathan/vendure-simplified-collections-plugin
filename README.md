@@ -19,6 +19,11 @@ plugins: [
       ...
     ]
 ```
+Then run db migrations.
+```console
+yarn migrations:generate product-collections
+yarn migartions run
+```
 ## Product Detail Page
 
 ![product-page](https://github.com/dalyathan/vendure-simplified-collections-plugin/assets/39517388/d7e5ac1a-a70e-4375-8371-92c00dea48b4)
