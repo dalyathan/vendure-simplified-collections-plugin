@@ -15,5 +15,6 @@
     "outDir": "./dist",
     "rootDir": "./src" 
   },
-  "include": ["./package.json","src/**/*"]
+  "include": ["./package.json","src/"],
+  "exclude": ["src/ui"]
 }
