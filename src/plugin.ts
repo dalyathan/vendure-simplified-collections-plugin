@@ -22,7 +22,7 @@ import { CollectionFiltersUpdateService } from './api/collection-filters-update.
     return config;
   }
 })
-export class ProductCollectionPlugin {
+export class SimplifiedCollectionsPlugin {
     static uiExtensions: AdminUiExtension = {
         extensionPath: path.join(__dirname, 'ui'),
         ngModules: [

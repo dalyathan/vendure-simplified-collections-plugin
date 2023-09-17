@@ -6,17 +6,17 @@ This `vendure` plugin allows you to maintain a two way relation between products
 
 Add the plugin to your config:
 ```ts
-import { ProductCollectionPlugin } from '../src/plugin';
+import { SimplifiedCollectionsPlugin } from '../src/plugin';
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 plugins: [
       ...
-      ProductCollectionPlugin,
+      SimplifiedCollectionsPlugin,
       ...
       AdminUiPlugin.init({
         ...
         app: compileUiExtensions({
           ...
-          extensions: [ProductCollectionPlugin.uiExtensions],
+          extensions: [SimplifiedCollectionsPlugin.uiExtensions],
           ...
         }),
         ...
@@ -26,7 +26,7 @@ plugins: [
 ```
 Then run db migrations.
 ```console
-yarn migration:generate product-collections
+yarn migration:generate simplified-collections
 yarn migartion run
 ```
 ## Product Detail Page
