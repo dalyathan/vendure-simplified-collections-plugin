@@ -6,7 +6,7 @@ This `vendure` plugin allows you to maintain a two way relation between products
 
 Add the plugin to your config:
 ```ts
-import { SimplifiedCollectionsPlugin } from '../src/plugin';
+import { SimplifiedCollectionsPlugin } from 'vendure-simplified-collections-plugin';
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 plugins: [
       ...
