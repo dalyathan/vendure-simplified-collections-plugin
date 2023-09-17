@@ -11,6 +11,9 @@
     "declaration": true,
     "sourceMap": false,
     "skipLibCheck": true,
-    "types": ["node"]
-  }
+    "types": ["node"],
+    "outDir": "./dist",
+    "rootDir": "./src" 
+  },
+  "include": ["./package.json","src/**/*"]
 }

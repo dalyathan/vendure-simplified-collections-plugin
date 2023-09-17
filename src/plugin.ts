@@ -1,4 +1,4 @@
-import '../types';
+import './types';
 import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core';
 import { AdminUiExtension } from '@vendure/ui-devkit/compiler';
 import path from 'path';
