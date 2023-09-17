@@ -18,4 +18,6 @@ plugins: [
       }),
       ...
     ]
-``` 
+```
+![product-page](https://github.com/dalyathan/vendure-simplified-collections-plugin/assets/39517388/d7e5ac1a-a70e-4375-8371-92c00dea48b4)
+![collection-page](https://github.com/dalyathan/vendure-simplified-collections-plugin/assets/39517388/17cb2ab9-fb8c-4786-b1a3-50b292abc65d)
