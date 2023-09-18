@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,12 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductAdminOverrideResolver = void 0;
-const graphql_1 = require("@nestjs/graphql");
-const core_1 = require("@vendure/core");
-const graphql_2 = require("@nestjs/graphql");
-const collection_filters_update_service_1 = require("./collection-filters-update.service");
+import { Resolver } from '@nestjs/graphql';
+import { Ctx, RequestContext, Allow, Permission, Transaction, ProductService } from '@vendure/core';
+import { Mutation, Args } from '@nestjs/graphql';
+import { ProductIdCollectionFilterUpdateService } from './collection-filters-update.service';
 let ProductAdminOverrideResolver = class ProductAdminOverrideResolver {
     constructor(collectionFiltersUpdateService, productService) {
         this.collectionFiltersUpdateService = collectionFiltersUpdateService;
@@ -39,28 +36,28 @@ let ProductAdminOverrideResolver = class ProductAdminOverrideResolver {
     }
 };
 __decorate([
-    (0, core_1.Transaction)(),
-    (0, graphql_2.Mutation)(),
-    (0, core_1.Allow)(core_1.Permission.CreateCatalog, core_1.Permission.CreateProduct),
-    __param(0, (0, core_1.Ctx)()),
-    __param(1, (0, graphql_2.Args)()),
+    Transaction(),
+    Mutation(),
+    Allow(Permission.CreateCatalog, Permission.CreateProduct),
+    __param(0, Ctx()),
+    __param(1, Args()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [core_1.RequestContext, Object]),
+    __metadata("design:paramtypes", [RequestContext, Object]),
     __metadata("design:returntype", Promise)
 ], ProductAdminOverrideResolver.prototype, "createProduct", null);
 __decorate([
-    (0, core_1.Transaction)(),
-    (0, graphql_2.Mutation)(),
-    (0, core_1.Allow)(core_1.Permission.UpdateCatalog, core_1.Permission.UpdateProduct),
-    __param(0, (0, core_1.Ctx)()),
-    __param(1, (0, graphql_2.Args)()),
+    Transaction(),
+    Mutation(),
+    Allow(Permission.UpdateCatalog, Permission.UpdateProduct),
+    __param(0, Ctx()),
+    __param(1, Args()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [core_1.RequestContext, Object]),
+    __metadata("design:paramtypes", [RequestContext, Object]),
     __metadata("design:returntype", Promise)
 ], ProductAdminOverrideResolver.prototype, "updateProduct", null);
 ProductAdminOverrideResolver = __decorate([
-    (0, graphql_1.Resolver)('Product'),
-    __metadata("design:paramtypes", [collection_filters_update_service_1.ProductIdCollectionFilterUpdateService,
-        core_1.ProductService])
+    Resolver('Product'),
+    __metadata("design:paramtypes", [ProductIdCollectionFilterUpdateService,
+        ProductService])
 ], ProductAdminOverrideResolver);
-exports.ProductAdminOverrideResolver = ProductAdminOverrideResolver;
+export { ProductAdminOverrideResolver };
