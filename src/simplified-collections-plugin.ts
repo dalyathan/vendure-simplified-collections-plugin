@@ -4,13 +4,13 @@ import { AdminUiExtension } from '@vendure/ui-devkit/compiler';
 import path from 'path';
 import { CollectionFilterOverrideResolver } from './api/collection-filter-override.resolver';
 import { ProductAdminOverrideResolver } from './api/product-collection.resolver';
-import { CollectionFiltersUpdateService } from './api/collection-filters-update.service';
+import { ProductIdCollectionFilterUpdateService } from './api/collection-filters-update.service';
 @VendurePlugin({
   imports:[PluginCommonModule],
   adminApiExtensions:{
     resolvers:[CollectionFilterOverrideResolver,ProductAdminOverrideResolver]
   },
-  providers:[CollectionFiltersUpdateService],
+  providers:[ProductIdCollectionFilterUpdateService],
   configuration: config => {
     config.customFields.Product.push({
         name: "collections",

@@ -1,6 +1,6 @@
 import { Resolver,Query,Args } from '@nestjs/graphql';
 import { Allow, Ctx, Permission, RequestContext, productIdCollectionFilter } from '@vendure/core';
-import { ConfigurableOperationDefinition, QueryCollectionsArgs } from '../generated-shop-types';
+import { ConfigurableOperationDefinition, QueryCollectionsArgs } from '../ui/generated-admin-types';
 
 @Resolver()
 export class CollectionFilterOverrideResolver{

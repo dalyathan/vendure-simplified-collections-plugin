@@ -3,4 +3,4 @@ export * from "./api/collection-filter-override.resolver";
 export * from "./api/collection-filters-update.service";
 export * from "./api/product-collection.resolver";
 export * from "./types"
-export * from "./generated-admin-types";
+export * from "./ui/generated-admin-types";

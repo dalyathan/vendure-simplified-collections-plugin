@@ -1,13 +1,13 @@
 import {  Resolver } from '@nestjs/graphql';
 import { Ctx, RequestContext, Product, Allow, Permission, Transaction, 
     Translated, ProductService } from '@vendure/core';
-import { MutationCreateProductArgs, MutationUpdateProductArgs } from '../generated-admin-types';
+import { MutationCreateProductArgs, MutationUpdateProductArgs } from '../ui/generated-admin-types';
 import { Mutation,Args } from '@nestjs/graphql';
-import { CollectionFiltersUpdateService } from './collection-filters-update.service';
+import { ProductIdCollectionFilterUpdateService } from './collection-filters-update.service';
 @Resolver('Product')
 export class ProductAdminOverrideResolver {
     constructor(
-        private collectionFiltersUpdateService: CollectionFiltersUpdateService,
+        private collectionFiltersUpdateService: ProductIdCollectionFilterUpdateService,
         private productService: ProductService,
     ){
 
@@ -21,12 +21,11 @@ export class ProductAdminOverrideResolver {
       @Args() args: MutationCreateProductArgs,
   ): Promise<Translated<Product>> {
       const { input } = args;
-      const result= this.productService.create(ctx, input);
-      const collectionIds= (input?.customFields as any)?.collections;
-      result.then(async(p)=>{
-        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,p.id as string,JSON.parse(collectionIds))
-      })
-      return this.productService.create(ctx, input);
+      const collectionIds= JSON.parse((input?.customFields as any)?.collections);
+      (input?.customFields as any).collections='';
+      const newlyCreatedProduct= await this.productService.create(ctx, input);
+      await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,newlyCreatedProduct.id as string,JSON.parse(collectionIds));
+      return newlyCreatedProduct;
   }
 
   @Transaction()
@@ -37,8 +36,9 @@ export class ProductAdminOverrideResolver {
       @Args() args: MutationUpdateProductArgs,
   ): Promise<Translated<Product>> {
       const { input } = args;
-      const collectionIds= (input?.customFields as any)?.collections;
-      await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,input.id as string,JSON.parse(collectionIds))
+      const collectionIds= JSON.parse((input?.customFields as any)?.collections);
+      (input?.customFields as any).collections='';
+      await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,input.id as string,collectionIds);
       return await this.productService.update(ctx, input);
   }
 }

@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common';
-import {TransactionalConnection, CollectionService, RequestContext, Collection, ProductVariant, productIdCollectionFilter } from '@vendure/core';
-import { UpdateCollectionInput, ConfigurableOperationInput, ConfigArg, ConfigurableOperation } from '../generated-admin-types';
+import {TransactionalConnection, CollectionService, RequestContext, Collection, productIdCollectionFilter } from '@vendure/core';
+import { UpdateCollectionInput, ConfigurableOperationInput, ConfigArg, ConfigurableOperation } from '../ui/generated-admin-types';
 import {In} from 'typeorm';
 @Injectable()
-export class CollectionFiltersUpdateService{
+export class ProductIdCollectionFilterUpdateService{
 
     constructor(
         private connections: TransactionalConnection,

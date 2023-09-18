@@ -48,7 +48,6 @@ import { CustomFieldConfig, DataService, FormInputComponent } from '@vendure/adm
         })
         this.activatedRoute.params.subscribe((data)=>{
           this.id=data['id'];
-          console.log(this.id," data['id']");
           this.dataService.query(gql`
             query ProductCollections($id: ID!){
               product(id: $id){
