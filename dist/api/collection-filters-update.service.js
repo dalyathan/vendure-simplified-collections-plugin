@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CollectionFiltersUpdateService = void 0;
+exports.ProductIdCollectionFilterUpdateService = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@vendure/core");
 const typeorm_1 = require("typeorm");
-let CollectionFiltersUpdateService = class CollectionFiltersUpdateService {
+let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpdateService {
     constructor(connections, collectionService) {
         this.connections = connections;
         this.collectionService = collectionService;
@@ -143,9 +143,9 @@ let CollectionFiltersUpdateService = class CollectionFiltersUpdateService {
         await Promise.all(awaitAbleActions);
     }
 };
-CollectionFiltersUpdateService = __decorate([
+ProductIdCollectionFilterUpdateService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [core_1.TransactionalConnection,
         core_1.CollectionService])
-], CollectionFiltersUpdateService);
-exports.CollectionFiltersUpdateService = CollectionFiltersUpdateService;
+], ProductIdCollectionFilterUpdateService);
+exports.ProductIdCollectionFilterUpdateService = ProductIdCollectionFilterUpdateService;

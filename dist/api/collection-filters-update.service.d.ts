@@ -1,5 +1,5 @@
 import { TransactionalConnection, CollectionService, RequestContext } from '@vendure/core';
-export declare class CollectionFiltersUpdateService {
+export declare class ProductIdCollectionFilterUpdateService {
     private connections;
     private collectionService;
     constructor(connections: TransactionalConnection, collectionService: CollectionService);

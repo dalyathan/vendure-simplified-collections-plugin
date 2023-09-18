@@ -24,17 +24,17 @@ let ProductAdminOverrideResolver = class ProductAdminOverrideResolver {
     }
     async createProduct(ctx, args) {
         const { input } = args;
-        const result = this.productService.create(ctx, input);
-        const collectionIds = input?.customFields?.collections;
-        result.then(async (p) => {
-            await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx, p.id, JSON.parse(collectionIds));
-        });
-        return this.productService.create(ctx, input);
+        const collectionIds = JSON.parse(input?.customFields?.collections);
+        (input?.customFields).collections = '';
+        const newlyCreatedProduct = await this.productService.create(ctx, input);
+        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx, newlyCreatedProduct.id, JSON.parse(collectionIds));
+        return newlyCreatedProduct;
     }
     async updateProduct(ctx, args) {
         const { input } = args;
-        const collectionIds = input?.customFields?.collections;
-        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx, input.id, JSON.parse(collectionIds));
+        const collectionIds = JSON.parse(input?.customFields?.collections);
+        (input?.customFields).collections = '';
+        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx, input.id, collectionIds);
         return await this.productService.update(ctx, input);
     }
 };
@@ -60,7 +60,7 @@ __decorate([
 ], ProductAdminOverrideResolver.prototype, "updateProduct", null);
 ProductAdminOverrideResolver = __decorate([
     (0, graphql_1.Resolver)('Product'),
-    __metadata("design:paramtypes", [collection_filters_update_service_1.CollectionFiltersUpdateService,
+    __metadata("design:paramtypes", [collection_filters_update_service_1.ProductIdCollectionFilterUpdateService,
         core_1.ProductService])
 ], ProductAdminOverrideResolver);
 exports.ProductAdminOverrideResolver = ProductAdminOverrideResolver;
