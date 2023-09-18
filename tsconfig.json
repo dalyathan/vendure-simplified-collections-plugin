@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": false,
     "lib": ["es2021"],
-    "module": "ES2022",
+    "module": "ESNext",
     "target": "es2021",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
