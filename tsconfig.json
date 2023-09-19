@@ -3,7 +3,7 @@
     "strict": true,
     "outDir": "dist",
     "lib": ["es2021"],
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "target": "es2021",
     "allowSyntheticDefaultImports": true,

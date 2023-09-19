@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,23 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Resolver, Query, Args } from '@nestjs/graphql';
-import { Allow, Ctx, Permission, RequestContext, productIdCollectionFilter } from '@vendure/core';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CollectionFilterOverrideResolver = void 0;
+const graphql_1 = require("@nestjs/graphql");
+const core_1 = require("@vendure/core");
 let CollectionFilterOverrideResolver = class CollectionFilterOverrideResolver {
     async collectionFilters(ctx, args) {
-        return [productIdCollectionFilter].map((i) => i.toGraphQlType(ctx));
+        return [core_1.productIdCollectionFilter].map((i) => i.toGraphQlType(ctx));
     }
 };
 __decorate([
-    Query(),
-    Allow(Permission.ReadCatalog, Permission.ReadCollection),
-    __param(0, Ctx()),
-    __param(1, Args()),
+    (0, graphql_1.Query)(),
+    (0, core_1.Allow)(core_1.Permission.ReadCatalog, core_1.Permission.ReadCollection),
+    __param(0, (0, core_1.Ctx)()),
+    __param(1, (0, graphql_1.Args)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [RequestContext, Object]),
+    __metadata("design:paramtypes", [core_1.RequestContext, Object]),
     __metadata("design:returntype", Promise)
 ], CollectionFilterOverrideResolver.prototype, "collectionFilters", null);
 CollectionFilterOverrideResolver = __decorate([
-    Resolver()
+    (0, graphql_1.Resolver)()
 ], CollectionFilterOverrideResolver);
-export { CollectionFilterOverrideResolver };
+exports.CollectionFilterOverrideResolver = CollectionFilterOverrideResolver;

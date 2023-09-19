@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,23 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@nestjs/common';
-import { TransactionalConnection, CollectionService, Collection, productIdCollectionFilter } from '@vendure/core';
-import { In } from 'typeorm';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProductIdCollectionFilterUpdateService = void 0;
+const common_1 = require("@nestjs/common");
+const core_1 = require("@vendure/core");
+const typeorm_1 = require("typeorm");
 let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpdateService {
     constructor(connections, collectionService) {
         this.connections = connections;
         this.collectionService = collectionService;
     }
     async handleExistingCollectionUpdated(ctx, productId, updatedIds) {
-        const collectionRepo = this.connections.getRepository(ctx, Collection);
+        const collectionRepo = this.connections.getRepository(ctx, core_1.Collection);
         const alreadyContainingCollectionsUpdateInputs = [];
         const newContainingCollectionsUpdateInputs = [];
         const existingCollectionsWithThisProduct = await collectionRepo.find({ where: {
                 productVariants: { productId }
             } });
         const newCollectionsWithThisProduct = await collectionRepo.find({ where: {
-                id: In(updatedIds.filter((i) => !existingCollectionsWithThisProduct.find((c) => c.id == i)))
+                id: (0, typeorm_1.In)(updatedIds.filter((i) => !existingCollectionsWithThisProduct.find((c) => c.id == i)))
             } });
         //if exists in existingCollectionsWithThisProduct but not in updatedIds, removed
         for (let collection of existingCollectionsWithThisProduct) {
@@ -32,7 +35,7 @@ let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpda
             };
             let adjusted = [];
             if (!updatedIds.find((i) => i == collection.id)) {
-                const thisCollectionsProductIdCollectionFilterIndex = collection.filters?.findIndex((f) => f.code === productIdCollectionFilter.code);
+                const thisCollectionsProductIdCollectionFilterIndex = collection.filters?.findIndex((f) => f.code === core_1.productIdCollectionFilter.code);
                 const thisCollectionsProductIdCollectionFilter = collection.filters[thisCollectionsProductIdCollectionFilterIndex];
                 if (thisCollectionsProductIdCollectionFilter?.args?.length) {
                     let productIdArgs = thisCollectionsProductIdCollectionFilter
@@ -59,7 +62,7 @@ let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpda
                 id: newCollection.id
             };
             let adjusted = [];
-            const thisCollectionsProductIdCollectionFilterIndex = newCollection.filters?.findIndex((f) => f.code === productIdCollectionFilter.code);
+            const thisCollectionsProductIdCollectionFilterIndex = newCollection.filters?.findIndex((f) => f.code === core_1.productIdCollectionFilter.code);
             const thisCollectionsProductIdCollectionFilter = newCollection.filters[thisCollectionsProductIdCollectionFilterIndex];
             if (thisCollectionsProductIdCollectionFilter?.args?.length) {
                 let productIdArgs = thisCollectionsProductIdCollectionFilter
@@ -122,7 +125,7 @@ let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpda
                                 name: "combineWithAnd",
                                 value: "false"
                             }],
-                        code: productIdCollectionFilter.code
+                        code: core_1.productIdCollectionFilter.code
                     };
                     adjusted = [{
                             arguments: newthisCollectionsProductIdCollectionFilter.args,
@@ -141,8 +144,8 @@ let ProductIdCollectionFilterUpdateService = class ProductIdCollectionFilterUpda
     }
 };
 ProductIdCollectionFilterUpdateService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [TransactionalConnection,
-        CollectionService])
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [core_1.TransactionalConnection,
+        core_1.CollectionService])
 ], ProductIdCollectionFilterUpdateService);
-export { ProductIdCollectionFilterUpdateService };
+exports.ProductIdCollectionFilterUpdateService = ProductIdCollectionFilterUpdateService;
