@@ -1,6 +1,5 @@
 import './types';
 import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core';
-import { AdminUiExtension } from '@vendure/ui-devkit/compiler';
 import path from 'path';
 import { CollectionFilterOverrideResolver } from './api/collection-filter-override.resolver';
 import { ProductAdminOverrideResolver } from './api/product-collection.resolver';
@@ -38,7 +37,7 @@ import { ProductIdCollectionFilterUpdateService } from './api/collection-filters
   }
 })
 export class SimplifiedCollectionsPlugin {
-    static uiExtensions: AdminUiExtension = {
+    static uiExtensions = {
         extensionPath: path.join(__dirname, 'ui'),
         ngModules: [
             {
