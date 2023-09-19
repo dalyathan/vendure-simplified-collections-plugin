@@ -2,7 +2,8 @@ import {  Component,OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {gql} from 'graphql-tag';
 import {ActivatedRoute} from '@angular/router';
-import { CustomFieldConfig, DataService, FormInputComponent } from '@vendure/admin-ui/core';
+import { CustomFieldConfig, DataService, FormInputComponent, StringCustomFieldConfig } from '@vendure/admin-ui/core';
+import { ID } from '@vendure/core';
 @Component({
     template:  `
     <ng-select
@@ -17,17 +18,18 @@ import { CustomFieldConfig, DataService, FormInputComponent } from '@vendure/adm
     </ng-select>
     `
   })
-  export class ProductCollectionCustomFieldComponent implements FormInputComponent<CustomFieldConfig>, OnInit {
+  export class ProductCollectionCustomFieldComponent implements FormInputComponent<StringCustomFieldConfig>, OnInit {
     isListInput?: boolean | undefined;
-    readonly: boolean;
-    formControl: FormControl;
-    config: CustomFieldConfig;
-    allCollections:any[]=[];
+    readonly!: boolean;
+    formControl!: FormControl;
+    config!: StringCustomFieldConfig;
+    allCollections:{id: ID,name:string}[]=[];
     options:any[]=[]
-    id:string;
     constructor(private dataService: DataService, 
       private cdr: ChangeDetectorRef,
       private activatedRoute: ActivatedRoute){
+        // this.config= super.config;
+        // this.readonly= this.config?.readonly;
 
     }
     ngOnInit(): void {
@@ -47,7 +49,7 @@ import { CustomFieldConfig, DataService, FormInputComponent } from '@vendure/adm
           }
         })
         this.activatedRoute.params.subscribe((data)=>{
-          this.id=data['id'];
+          const productId=data['id'];
           this.dataService.query(gql`
             query ProductCollections($id: ID!){
               product(id: $id){
@@ -56,9 +58,9 @@ import { CustomFieldConfig, DataService, FormInputComponent } from '@vendure/adm
                 }
               }
             }
-          `,{id: this.id}).single$.subscribe((data:any)=>{
+          `,{id: productId}).single$.subscribe((data:any)=>{
             if(data?.product?.collections?.length){
-              this.options=data?.product?.collections.map((i)=> i.id);
+              this.options=data?.product?.collections.map((i:any)=> i.id);
               this.cdr.markForCheck();
             }
           })

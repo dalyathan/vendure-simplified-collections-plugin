@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "strict": false,
+    "strict": true,
+    "outDir": "dist",
     "lib": ["es2021"],
-    "module": "ESNext",
+    "module": "commonjs",
     "target": "es2021",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -11,10 +12,7 @@
     "declaration": true,
     "sourceMap": false,
     "skipLibCheck": true,
-    "types": ["node"],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "moduleResolution":"node",
+    "types": ["node"]
   },
   "include": ["src/"],
   "exclude": ["src/ui"]
