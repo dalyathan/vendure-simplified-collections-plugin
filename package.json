@@ -1,6 +1,6 @@
 {
     "name": "vendure-simplified-collections-plugin",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "repository": "git@github.com:dalyathan/vendure-simplified-collections-plugin.git",
     "author": "Surafel Melese Tariku",
     "license": "MIT",
@@ -24,7 +24,7 @@
     },
     "scripts": {
       "start": "yarn ts-node test/dev-server.ts",
-      "build": "rimraf dist && tsc && copyfiles -u 1 'src/ui/**/*' dist/vendure-plugin-stripe-subscription/src/",
+      "build": "rimraf dist && tsc",
       "test": "vitest run"
     },
     "devDependencies": {
