@@ -3,6 +3,7 @@
     "strict": true,
     "lib": ["es2021"],
     "module": "commonjs",
+    "rootDir": "src",
     "target": "es2021",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
