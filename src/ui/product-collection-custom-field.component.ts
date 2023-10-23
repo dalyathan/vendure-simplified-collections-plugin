@@ -65,7 +65,6 @@ import { ID } from '@vendure/core';
         })
     }
     onChange(event:any){
-      console.log(this.options);
       this.formControl.setValue(this.options);
       this.formControl.markAsDirty() ;
     }
