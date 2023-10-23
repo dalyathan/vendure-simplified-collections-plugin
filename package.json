@@ -4,8 +4,8 @@
     "repository": "git@github.com:dalyathan/vendure-simplified-collections-plugin.git",
     "author": "Surafel Melese Tariku",
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/src/index.js",
+    "types": "dist/src/index.d.ts",
     "keywords": [
       "vendure",
       "collections",
