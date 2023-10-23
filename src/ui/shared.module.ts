@@ -8,4 +8,4 @@ import { ProductCollectionCustomFieldComponent } from './product-collection-cust
       registerFormInputComponent('product-collections', ProductCollectionCustomFieldComponent),
     ]
   })
-  export class SharedExtensionModule {}
+  export class SimplifiedCollectionsSharedExtensionModule {}

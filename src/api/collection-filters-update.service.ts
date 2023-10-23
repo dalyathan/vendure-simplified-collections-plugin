@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {TransactionalConnection, CollectionService, RequestContext, Collection, productIdCollectionFilter } from '@vendure/core';
 import { UpdateCollectionInput, ConfigurableOperationInput, ConfigArg, ConfigurableOperation } from '../ui/generated-admin-types';
 import {In} from 'typeorm';
-import normalizeId from '../../test/helpers';
+import normalizeId from '../helpers';
 @Injectable()
 export class ProductIdCollectionFilterUpdateService{
 

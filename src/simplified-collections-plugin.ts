@@ -1,4 +1,3 @@
-import './types';
 import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core';
 import path from 'path';
 import { CollectionFilterOverrideResolver } from './api/collection-filter-override.resolver';
@@ -44,7 +43,7 @@ export class SimplifiedCollectionsPlugin {
             {
                 type: 'shared' as const,
                 ngModuleFileName: 'shared.module.ts',
-                ngModuleName: 'SharedExtensionModule',
+                ngModuleName: 'SimplifiedCollectionsSharedExtensionModule',
             },
         ],
     };
