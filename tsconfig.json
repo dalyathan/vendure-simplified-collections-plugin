@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "dist",
     "lib": ["es2021"],
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "target": "es2021",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -13,6 +11,7 @@
     "declaration": true,
     "sourceMap": false,
     "skipLibCheck": true,
+    "outDir": "dist",
     "types": ["node"]
   },
   "include": ["src/"],

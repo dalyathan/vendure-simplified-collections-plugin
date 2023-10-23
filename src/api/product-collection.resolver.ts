@@ -21,10 +21,12 @@ export class ProductAdminOverrideResolver {
       @Args() args: MutationCreateProductArgs,
   ): Promise<Translated<Product>> {
       const { input } = args;
-      const collectionIds= JSON.parse((input?.customFields as any)?.collections);
-      (input?.customFields as any).collections='';
+      const collectionIds:string[]= (input?.customFields as any)?.collections;
+      (input?.customFields as any).collections=[];
       const newlyCreatedProduct= await this.productService.create(ctx, input);
-      await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,newlyCreatedProduct.id as string,JSON.parse(collectionIds));
+      if(collectionIds?.length){
+        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,newlyCreatedProduct.id as string,collectionIds);
+      }
       return newlyCreatedProduct;
   }
 
@@ -36,9 +38,11 @@ export class ProductAdminOverrideResolver {
       @Args() args: MutationUpdateProductArgs,
   ): Promise<Translated<Product>> {
       const { input } = args;
-      const collectionIds= JSON.parse((input?.customFields as any)?.collections);
-      (input?.customFields as any).collections='';
-      await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,input.id as string,collectionIds);
+      const collectionIds= (input?.customFields as any)?.collections;
+      (input?.customFields as any).collections=[];
+      if(collectionIds?.length){
+        await this.collectionFiltersUpdateService.handleExistingCollectionUpdated(ctx,input.id as string,collectionIds);
+      }
       return await this.productService.update(ctx, input);
   }
 }
