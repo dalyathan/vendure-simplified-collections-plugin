@@ -121,7 +121,6 @@ export class ProductIdCollectionFilterUpdateService{
                               }],
                             code:  productIdCollectionFilter.code
                         }
-                        console.log(newthisCollectionsProductIdCollectionFilter,'--------newthisCollectionsProductIdCollectionFilter---')
                         adjusted=[{
                             arguments: newthisCollectionsProductIdCollectionFilter.args,
                             code: newthisCollectionsProductIdCollectionFilter.code
