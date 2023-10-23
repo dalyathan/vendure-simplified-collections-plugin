@@ -2,7 +2,7 @@ import {  Component,OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {gql} from 'graphql-tag';
 import {ActivatedRoute} from '@angular/router';
-import { CustomFieldConfig, DataService, FormInputComponent, StringCustomFieldConfig } from '@vendure/admin-ui/core';
+import { DataService, FormInputComponent, StringCustomFieldConfig } from '@vendure/admin-ui/core';
 import { ID } from '@vendure/core';
 @Component({
     template:  `
@@ -19,7 +19,7 @@ import { ID } from '@vendure/core';
     `
   })
   export class ProductCollectionCustomFieldComponent implements FormInputComponent<StringCustomFieldConfig>, OnInit {
-    isListInput?: boolean | undefined;
+    isListInput?: boolean | undefined=true;
     readonly!: boolean;
     formControl!: FormControl;
     config!: StringCustomFieldConfig;
@@ -28,8 +28,6 @@ import { ID } from '@vendure/core';
     constructor(private dataService: DataService, 
       private cdr: ChangeDetectorRef,
       private activatedRoute: ActivatedRoute){
-        // this.config= super.config;
-        // this.readonly= this.config?.readonly;
 
     }
     ngOnInit(): void {
@@ -67,8 +65,9 @@ import { ID } from '@vendure/core';
         })
     }
     onChange(event:any){
-      this.formControl.setValue(JSON.stringify(this.options));
-      this.formControl.markAsDirty();
+      console.log(this.options);
+      this.formControl.setValue(this.options);
+      this.formControl.markAsDirty() ;
     }
     
   }

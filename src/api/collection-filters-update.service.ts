@@ -2,6 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {TransactionalConnection, CollectionService, RequestContext, Collection, productIdCollectionFilter } from '@vendure/core';
 import { UpdateCollectionInput, ConfigurableOperationInput, ConfigArg, ConfigurableOperation } from '../ui/generated-admin-types';
 import {In} from 'typeorm';
+import normalizeId from '../../test/helpers';
 @Injectable()
 export class ProductIdCollectionFilterUpdateService{
 
@@ -19,7 +20,7 @@ export class ProductIdCollectionFilterUpdateService{
                 productVariants:{productId}
             }})
             const newCollectionsWithThisProduct= await collectionRepo.find({where:{
-                id: In(updatedIds.filter((i)=> !existingCollectionsWithThisProduct.find((c)=> c.id == i)))
+                id: In(updatedIds.filter((i)=> !existingCollectionsWithThisProduct.find((c)=> c.id == i)).map((i)=> normalizeId(i)))
             }})
             //if exists in existingCollectionsWithThisProduct but not in updatedIds, removed
             for(let collection of existingCollectionsWithThisProduct){
@@ -120,6 +121,7 @@ export class ProductIdCollectionFilterUpdateService{
                               }],
                             code:  productIdCollectionFilter.code
                         }
+                        console.log(newthisCollectionsProductIdCollectionFilter,'--------newthisCollectionsProductIdCollectionFilter---')
                         adjusted=[{
                             arguments: newthisCollectionsProductIdCollectionFilter.args,
                             code: newthisCollectionsProductIdCollectionFilter.code

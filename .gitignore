@@ -1,2 +1,4 @@
+/dist/
+/data/
+/test/admin-ui/
 node_modules
-dist
