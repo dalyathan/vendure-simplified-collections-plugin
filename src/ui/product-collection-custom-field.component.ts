@@ -2,9 +2,11 @@ import {  Component,OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {gql} from 'graphql-tag';
 import {ActivatedRoute} from '@angular/router';
-import { DataService, FormInputComponent, StringCustomFieldConfig } from '@vendure/admin-ui/core';
+import { DataService, FormInputComponent, StringCustomFieldConfig,SharedModule } from '@vendure/admin-ui/core';
 import { ID } from '@vendure/core';
 @Component({
+    standalone: true,
+    imports: [SharedModule],
     template:  `
     <ng-select
         [multiple]="true"
