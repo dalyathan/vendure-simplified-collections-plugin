@@ -1,15 +1,15 @@
-import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core';
+import { LanguageCode, PluginCommonModule, VendurePlugin,productIdCollectionFilter } from '@vendure/core';
 import path from 'path';
-import { CollectionFilterOverrideResolver } from './api/collection-filter-override.resolver';
 import { ProductAdminOverrideResolver } from './api/product-collection.resolver';
 import { ProductIdCollectionFilterUpdateService } from './api/collection-filters-update.service';
 @VendurePlugin({
   imports:[PluginCommonModule],
   adminApiExtensions:{
-    resolvers:[CollectionFilterOverrideResolver,ProductAdminOverrideResolver]
+    resolvers:[ProductAdminOverrideResolver]
   },
   providers:[ProductIdCollectionFilterUpdateService],
   configuration: config => {
+    config.catalogOptions.collectionFilters=[productIdCollectionFilter]
     config.customFields.Product.push({
         name: "collections",
         type: "string",
@@ -39,12 +39,6 @@ import { ProductIdCollectionFilterUpdateService } from './api/collection-filters
 export class SimplifiedCollectionsPlugin {
     static uiExtensions = {
         extensionPath: path.join(__dirname, 'ui'),
-        ngModules: [
-            {
-                type: 'shared' as const,
-                ngModuleFileName: 'shared.module.ts',
-                ngModuleName: 'SimplifiedCollectionsSharedExtensionModule',
-            },
-        ],
+        providers: ['providers.ts'],
     };
 }

@@ -3,7 +3,6 @@ import { DefaultLogger, LogLevel, mergeConfig,DefaultSearchPlugin } from '@vendu
 import {
   createTestEnvironment,
   registerInitializer,
-  SimpleGraphQLClient,
   SqljsInitializer,
   testConfig,
 } from '@vendure/testing';
@@ -15,9 +14,6 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import {SimplifiedCollectionsPlugin} from '../src';
 (async () => {
   let server: TestServer;
-  let adminClient: SimpleGraphQLClient;
-  let shopClient: SimpleGraphQLClient;
-  const serverStarted = false;
 
   registerInitializer('sqljs', new SqljsInitializer('data'));
   const config = mergeConfig(testConfig, {
@@ -41,7 +37,7 @@ import {SimplifiedCollectionsPlugin} from '../src';
     },
   });
 
-  ({ server, adminClient, shopClient } = createTestEnvironment(config));
+  ({ server } = createTestEnvironment(config));
   await server.init({
     initialData,
     productsCsvPath: 'test/product-import.csv',
